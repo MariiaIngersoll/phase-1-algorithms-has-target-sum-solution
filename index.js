@@ -1,20 +1,31 @@
 function hasTargetSum(array, target) {
-  // Write your algorithm here
+  for (let i = 0; i < array.length; i++) {
+    // n steps (depending on the length of the input array)
+    const complement = target - array[i];
+    for (let j = i + 1; j < array.length; j++) {
+      // n * n steps (nested loop!)
+      if (array[j] === complement) return true;
+    }
+  }
+  // 1 step
+  return false;
 }
 
-/* 
-  Write the Big O time complexity of your function here
-*/
 
-/* 
-  Add your pseudocode here
-*/
-
-/*
-  Add written explanation of your solution here
-*/
-
-// You can run `node index.js` to view these console logs
+function hasTargetSum(array, target) {
+  // 1 step
+  const seenNumbers = {};
+  for (const number of array) {
+    // n steps
+    const complement = target - number;
+    // n steps
+    if (seenNumbers[complement]) return true;
+    // n steps
+    seenNumbers[number] = true;
+  }
+  // 1 step
+  return false;
+}
 if (require.main === module) {
   // add your own custom tests in here
   console.log("Expecting: true");
